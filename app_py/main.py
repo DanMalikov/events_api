@@ -1,7 +1,12 @@
 from fastapi import FastAPI
 
-app = FastAPI(root_path="/api")
+from app_py.presentation.routers.event_routers import event_router
 
-@app.get("/health")
-async def health_check():
-    return {"status": "ok"}
+
+def create_app():
+    app = FastAPI(root_path="/api")
+
+    app.include_router(event_router)
+
+    return app
+
